@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Creaplex Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Other CSS links here -->
+  <style>
+    :root {
+  --primary: #e63030bf;
+  --accent: #ffffffc5;
+  --bg: #0f0e17;
+  --text: #fffffe;
+  --card: rgba(255, 255, 255, 0.05);
+  --glass: rgba(255, 255, 255, 0.1);
+  --shadow: rgba(7, 3, 52, 0.752); /* orange shadow */
+}
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1.5rem;
+      z-index: 1000;
+      background: var(--glass);
+      padding: 0.7rem 2rem;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    header {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('creaplex.png') center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+header .blur-behind {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* dark overlay */
+  backdrop-filter: blur(10px);    /* soft blur */
+  z-index: 1;
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
+header h1 {
+  font-size: 5.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text);
+  z-index: 2;
+  position: relative;
+  animation: moveText 5s infinite alternate;
+  text-shadow: 0 10px 30px rgba(9, 3, 48, 0.821);
+}
+#animated-heading span {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer; /* 👈 This adds the hand cursor */
+}
+
+#animated-heading span:hover {
+  transform: scale(1.4) rotate(8deg);
+  color: var(--primary);
+}
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes moveText {
+      0% {
+        transform: translateX(0) translateY(0);
+      }
+      50% {
+        transform: translateX(20px) translateY(10px);
+      }
+      100% {
+        transform: translateX(0) translateY(0);
+      }
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      background: rgba(14, 2, 67, 0.768);
+      border-radius: 50%;
+      animation: moveShape 3s infinite alternate;
+      z-index: 1;
+      box-shadow: 0 5px 15px var(--shadow);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 70%;
+      width: 80px;
+      height: 80px;
+      background: rgba(16, 2, 58, 0.649);
+      border-radius: 50%;
+      animation: moveShape 4s infinite alternate;
+      z-index: 1;
+      box-shadow: 0 5px 15px var(--shadow);
+    }
+
+    @keyframes moveShape {
+      0% {
+        transform: translateX(0) translateY(0);
+      }
+      100% {
+        transform: translateX(100px) translateY(50px);
+      }
+    }
+
+    .section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section h2::after {
+      content: '';
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      display: block;
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+
+    .about-box {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 20px rgba(127, 90, 240, 0.15);
+      text-align: center;
+    }
+
+    .about-box p {
+      font-size: 1.4rem;
+      color: #ddd;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 1.5rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 15px var(--shadow);
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    .card p {
+      color: #ccc;
+    }
+
+    .project-detail {
+      display: none;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .project-detail.active {
+      animation: fadeIn 0.8s ease both;
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+
+    .project-detail img {
+      max-width: 90%;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+    }
+
+    .back-button {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: #010a25d5;
+    }
+
+    .contact-box {
+      background: var(--card);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+
+    .contact-box h3 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-box p, .contact-box a {
+      font-size: 1.2rem;
+      color: #ff3d1fb9;
+    }
+
+    .contact-box a {
+      text-decoration: none;
+      color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: #151515;
+      color: #aaa;
+    }
+    /* Add styles for the service icons */
+.service-icon {
+  font-size: 3rem; /* Size of the icons */
+  color: var(--primary); /* Primary color for icons */
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the icon */
+.card:hover .service-icon {
+  transform: translateY(-10px);
+  color: var(--accent);
+}
+
+/* Hover effect for the card */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(127, 90, 240, 0.2);
+  background: var(--glass); /* Light background on hover */
+}
+
+/* Adding transition for the description animation */
+.card p {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Make the description visible on hover */
+.card:hover p {
+  opacity: 1;
+}
+
+/* Add spacing around the grid for a clean look */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem; /* Increased gap between cards */
+}
+
+/* Adding a subtle shadow effect on card */
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(127, 90, 240, 0.15);
+  cursor: pointer;
+}
+
+/* Hover effect for the text */
+.card:hover h3 {
+  color: var(--primary);
+}
+  </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      
+<header>
+    <div class="blur-behind"></div>
+    <h1 id="animated-heading">
+        <span>V</span><span>i</span><span>s</span><span>u</span><span>a</span><span>l</span>
+        <span>&nbsp;</span>
+        <span>S</span><span>t</span><span>r</span><span>a</span><span>t</span><span>e</span><span>g</span><span>y</span>
+        <span>&nbsp;</span>
+        <span>B</span><span>u</span><span>i</span><span>l</span><span>t</span>
+        <span>&nbsp;</span>
+        <span>f</span><span>o</span><span>r</span>
+        <span>&nbsp;</span>
+        <span>I</span><span>m</span><span>p</span><span>a</span><span>c</span><span>t</span>
+      </h1>
+  </header>
+
+<section id="about" class="section">
+  <h2>About Me</h2>
+  <div class="about-box">
+    <p>
+      I'm a creative graphic designer specializing in logos, social media posts, roll-ups, and business cards.
+      I focus on clean, impactful designs that help brands stand out.
+      I work independently, love online projects, and always aim to deliver high-quality visuals that speak.
+    </p>
+  </div>
+</section>
+<section id="services" class="section">
+    <h2>Our Services</h2>
+    <div class="grid">
+      <!-- Branding Design Service -->
+      <div class="card">
+        <i class="fas fa-paint-brush service-icon"></i>
+        <h3>Branding Design</h3>
+        <p>
+          <em>(Logos, business cards, brand identity)</em><br><br>
+          We build strong brand identities from the ground up. From custom logo creation to cohesive business cards and visual branding elements, we help businesses make a lasting first impression with a unique and professional image.
+        </p>
+      </div>
+      
+      <!-- Social Media Design Service -->
+      <div class="card">
+        <i class="fab fa-instagram service-icon"></i>
+        <h3>Social Media Design</h3>
+        <p>
+          <em>(Instagram posts, stories, ads, highlights)</em><br><br>
+          In today’s digital world, content is everything. We design engaging and visually appealing graphics for social media platforms, tailored to your brand’s tone and audience. Whether it’s a story, a post, or a sponsored ad, we help you stand out in the feed.
+        </p>
+      </div>
+  
+      <!-- Print Design Service -->
+      <div class="card">
+        <i class="fas fa-print service-icon"></i>
+        <h3>Print Design</h3>
+        <p>
+          <em>(Flyers, brochures, posters, roll-ups)</em><br><br>
+          Print is far from dead. We create high-quality designs for physical media that communicate clearly and attract attention. Ideal for events, promotions, or brand awareness, our print designs are both eye-catching and effective.
+        </p>
+      </div>
+  
+      <!-- Packaging & Menu Design Service -->
+      <div class="card">
+        <i class="fas fa-box service-icon"></i>
+        <h3>Packaging & Menu Design</h3>
+        <p>
+          <em>(Product packaging, restaurant menus)</em><br><br>
+          We turn packaging and menus into branding tools. Whether it's a sleek product box or a creative restaurant menu, we design with both style and functionality in mind—ensuring your products or food offerings leave a lasting impression.
+        </p>
+      </div>
+    </div>
+  </section>
+<section id="portfolio" class="section">
+  <h2>Projects</h2>
+  <div class="grid">
+    <div class="card" onclick="showProject('levelup')">
+      <img src="lev.jpg" alt="Level Up Bootcamp" class="card-img">
+      <h3>Level Up Bootcamp</h3>
+      <p>A dynamic branding project for a training initiative.</p>
+    </div>
+    <div class="card" onclick="showProject('digitrade')">
+      <img src="Digi.png" alt="DigiTrade Event" class="card-img">
+      <h3>DigiTrade</h3>
+      <p>Brand identity and visuals for an e-commerce-focused event.</p>
+    </div>
+    <div class="card" onclick="showProject('brain')">
+      <img src="brain.png" alt="قعدة BRAIN’S Podcast" class="card-img">
+      <h3>قعدة BRAIN’S</h3>
+      <p>A podcast that sparks curiosity and explores bold ideas through thoughtful conversations.</p>
+    </div>
+    <div class="card" onclick="showProject('nadhra')">
+      <img src="nadra.jpg" alt="نظرة TV Segment" class="card-img">
+      <h3>نظرة</h3>
+      <p>A thought-provoking TV segment exploring the intersections of economy, technology, and society.</p>
+    </div>
+  </div>
+  <div id="levelup" class="project-detail">
+    <h2>Level Up Bootcamp</h2>
+    <img src="l.png" alt="Level Up Bootcamp Details">
+    <br><button class="back-button" onclick="hideProject()">← Back</button>
+  </div>
+  <div id="digitrade" class="project-detail">
+    <h2>DigiTrade</h2>
+    <img src="d.png" alt="DigiTrade Details">
+    <br><button class="back-button" onclick="hideProject()">← Back</button>
+  </div>
+  <div id="brain" class="project-detail">
+    <h2>قعدة BRAIN’S</h2>
+    <img src="k.png" alt="BRAIN’S Details">
+    <br><button class="back-button" onclick="hideProject()">← Back</button>
+  </div>
+  <div id="nadhra" class="project-detail">
+    <h2>نظرة</h2>
+    <img src="n.png" alt="Nadhra Details">
+    <br><button class="back-button" onclick="hideProject()">← Back</button>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <div class="contact-box">
+    <h3>Let's Connect</h3>
+    <p><strong>Email:</strong> <a href="mailto:creaplex0@gmail.com">creaplex0@gmail.com</a></p>
+    <p><strong>Instagram:</strong> <a href="https://www.instagram.com/creaplex_?igsh=MTIxb2Y1cnB3b2Uydg==" target="_blank">@creaplex_</a></p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Creaplex. Designed with purpose and pixel precision.</p>
+</footer>
+
+<script>
+  function showProject(id) {
+    document.querySelectorAll('.project-detail').forEach(div => {
+      div.style.display = 'none';
+      div.classList.remove('active');
+    });
+    const target = document.getElementById(id);
+    target.style.display = 'block';
+    void target.offsetWidth;
+    target.classList.add('active');
+    window.scrollTo({ top: target.offsetTop - 50, behavior: 'smooth' });
+  }
+
+  function hideProject() {
+    document.querySelectorAll('.project-detail').forEach(div => {
+      div.style.display = 'none';
+      div.classList.remove('active');
+    });
+    const portfolioSection = document.getElementById('portfolio');
+    window.scrollTo({ top: portfolioSection.offsetTop - 50, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
